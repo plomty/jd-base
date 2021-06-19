@@ -1,4 +1,4 @@
-## Version: v3.41.0
+## Version: v3.42.0
 ## Date: 2021-06-16
 ## Update Content: 重新加入AutoHelpOther参数，但是部分人启用后并不生效，默认false自行按照自身情况修改为true。（配置文件不会自动智能替换，需要手动进入面板通过对比工具手动替换）
 
