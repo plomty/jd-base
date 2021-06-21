@@ -1,7 +1,7 @@
 FROM node:lts-alpine
-ARG JD_BASE_URL=https://ghproxy.com/https://github.com/wuzhi04/jd-base
+ARG JD_BASE_URL=https://ghproxy.com/https://github.com/plomty/jd-base
 ARG JD_BASE_BRANCH=main
-ARG JD_SCRIPTS_URL=https://ghproxy.com/https://github.com/wuzhi04/MyActions
+ARG JD_SCRIPTS_URL=https://ghproxy.com/https://github.com/plomty/MyActions
 ARG JD_SCRIPTS_BRANCH=main
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
@@ -24,12 +24,14 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              perl \
                              openssl \
                              openssh \
+                             vim \
     && rm -rf /var/cache/apk/* \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && git clone -b ${JD_BASE_BRANCH} ${JD_BASE_URL} ${JD_DIR} \
     && cd ${JD_DIR}/panel \
     && npm install \
+    && npm audit fix \
     && git clone -b ${JD_SCRIPTS_BRANCH} ${JD_SCRIPTS_URL} ${JD_DIR}/scripts \
     && cd ${JD_DIR}/scripts \
     && npm install \
